@@ -82,6 +82,15 @@ builder.Services.AddOpenApi(options =>
             In = ParameterLocation.Header,
             Description = "JWT access token kiriting (Bearer prefiksisiz)."
         };
+
+        // Global security — Swagger UI "Authorize" tugmasi tokenni barcha so'rovlarga qo'shadi.
+        var requirement = new OpenApiSecurityRequirement
+        {
+            [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>(),
+        };
+        document.Security ??= new List<OpenApiSecurityRequirement>();
+        document.Security.Add(requirement);
+
         return Task.CompletedTask;
     });
 });
@@ -103,8 +112,14 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();                 // /openapi/v1.json
-    app.MapScalarApiReference();      // /scalar/v1 — interaktiv API UI
+    app.MapOpenApi();                 // /openapi/v1.json — OpenAPI hujjati
+    app.UseSwaggerUI(options =>       // /swagger — Swagger UI
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "ProfessionalProgressCenter API v1");
+        options.DocumentTitle = "ProfessionalProgressCenter API";
+        options.RoutePrefix = "swagger";
+    });
+    app.MapScalarApiReference();      // /scalar/v1 — muqobil API UI
 }
 
 app.UseCors(CorsPolicy);

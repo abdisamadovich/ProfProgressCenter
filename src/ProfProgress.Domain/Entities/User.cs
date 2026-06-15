@@ -21,6 +21,9 @@ public class User : BaseEntity
 
     public DateTime? RefreshTokenExpiresAt { get; set; }
 
+    // Telegram bog'lanishi (telefon raqami orqali ulanadi)
+    public long? TelegramChatId { get; set; }
+
     // Navigatsiya
     public Student? Student { get; set; }
 

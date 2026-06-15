@@ -19,6 +19,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         b.HasIndex(x => x.Email).IsUnique();
         b.HasIndex(x => x.RefreshToken);
+        b.HasIndex(x => x.TelegramChatId).IsUnique();
 
         b.HasOne(x => x.Student)
             .WithOne(s => s.User)

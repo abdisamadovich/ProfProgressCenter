@@ -19,6 +19,9 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Lesson> Lessons => Set<Lesson>();
     public DbSet<Attendance> Attendances => Set<Attendance>();
     public DbSet<Grade> Grades => Set<Grade>();
+    public DbSet<Test> Tests => Set<Test>();
+    public DbSet<TestBlock> TestBlocks => Set<TestBlock>();
+    public DbSet<TestAttempt> TestAttempts => Set<TestAttempt>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -18,6 +18,9 @@ public interface IAppDbContext
     DbSet<Lesson> Lessons { get; }
     DbSet<Attendance> Attendances { get; }
     DbSet<Grade> Grades { get; }
+    DbSet<Test> Tests { get; }
+    DbSet<TestBlock> TestBlocks { get; }
+    DbSet<TestAttempt> TestAttempts { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

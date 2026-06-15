@@ -5,6 +5,7 @@ using ProfProgress.Application.Common.Interfaces;
 using ProfProgress.Application.Common.Settings;
 using ProfProgress.Infrastructure.Persistence;
 using ProfProgress.Infrastructure.Services;
+using ProfProgress.Infrastructure.Telegram;
 
 namespace ProfProgress.Infrastructure;
 
@@ -20,9 +21,14 @@ public static class DependencyInjection
         services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
 
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
+        services.Configure<TelegramSettings>(configuration.GetSection(TelegramSettings.SectionName));
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+        // Telegram bot (token bo'lmasa o'zi o'chib qoladi)
+        services.AddSingleton<ConversationStore>();
+        services.AddHostedService<TelegramBotService>();
 
         return services;
     }
