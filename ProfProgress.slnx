@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ProfProgress.Api/ProfProgress.Api.csproj" />
+    <Project Path="src/ProfProgress.Application/ProfProgress.Application.csproj" />
+    <Project Path="src/ProfProgress.Domain/ProfProgress.Domain.csproj" />
+    <Project Path="src/ProfProgress.Infrastructure/ProfProgress.Infrastructure.csproj" />
+  </Folder>
+</Solution>
